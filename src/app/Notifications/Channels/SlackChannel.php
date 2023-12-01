@@ -13,6 +13,6 @@ class SlackChannel
     {
         $message = $notification->toSlack($notifiable);
 
-        // Send notification to the $notifiable instance...
+        // here we can handle our custom way of sending slack notification along with other functionality
     }
 }

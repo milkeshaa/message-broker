@@ -21,7 +21,7 @@ class LogNotification
     public function handle(NotificationSent $event): void
     {
         Log::channel($event->notification?->queue)->info(
-            sprintf('Notification (%s) sent with response: %s.', $event->notification->id, $event->response)
+            sprintf('Notification (%s) sent with response: %s.', $event->notification->id, json_encode($event->response))
         );
     }
 }

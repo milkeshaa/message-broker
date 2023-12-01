@@ -110,11 +110,27 @@ class PushMessage extends Command implements PromptsForMissingInput
     private function getReceiver(ChannelEnum $channel): string
     {
         $receiver = '';
+        $error = '';
         if (ChannelEnum::EMAIL === $channel) {
             $receiver = $this->ask('Please, provide receivers email');
             if (!$receiver) {
-                throw new \Exception('Receiver of email is required.');
+                $error = 'Receiver of email is required.';
             }
+        }
+        if (ChannelEnum::SMS === $channel) {
+            $receiver = $this->ask('Please, provide receivers phone number');
+            if (!$receiver) {
+                $error = 'Receiver of SMS is required.';
+            }
+        }
+        if (ChannelEnum::WEBHOOK === $channel) {
+            $receiver = $this->ask('Please, provide webhook url');
+            if (!$receiver) {
+                $error = 'Webhook url is required.';
+            }
+        }
+        if (!$receiver) {
+            throw new \Exception($error);
         }
         return $receiver;
     }

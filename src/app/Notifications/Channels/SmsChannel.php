@@ -13,6 +13,6 @@ class SmsChannel
     {
         $message = $notification->toSms($notifiable);
 
-        // Send notification to the $notifiable instance...
+        // here we can handle our custom way of sending sms notification along with other functionality
     }
 }

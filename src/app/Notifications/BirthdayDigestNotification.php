@@ -12,7 +12,6 @@ use App\Notifications\Channels\TelegramChannel;
 use App\Notifications\Channels\WebhookChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 
@@ -64,7 +63,8 @@ class BirthdayDigestNotification extends Notification implements ShouldQueue
     public function toSms(object $notifiable): array
     {
         return [
-
+            'header' => 'Birthday digest SMS!',
+            'footer' => 'Kind regards!'
         ];
     }
 
@@ -76,7 +76,7 @@ class BirthdayDigestNotification extends Notification implements ShouldQueue
     public function toTelegram(object $notifiable): array
     {
         return [
-
+            // here we can use any TelegramViewClass which can prepare any shape of the out message
         ];
     }
 
@@ -88,19 +88,20 @@ class BirthdayDigestNotification extends Notification implements ShouldQueue
     public function toWebhook(object $notifiable): array
     {
         return [
-
+            'body' => $this->message->body,
+            'metadata' => $this->message->metadata,
         ];
     }
 
     /**
-     * Get the webhook representation of the notification.
+     * Get the slack representation of the notification.
      *
      * As a return type here can be any SlackViewClass, or any from trusted libs
      */
     public function toSlack(object $notifiable): array
     {
         return [
-
+            // here we can use any SlackViewClass which can prepare any shape of the out message
         ];
     }
 
@@ -116,7 +117,7 @@ class BirthdayDigestNotification extends Notification implements ShouldQueue
         ];
     }
 
-    public function failed(\Exception $e): void
+    public function failed(\Throwable $e): void
     {
         Log::channel($this->queue)->info(
             sprintf('Notification (%s) failed with exception: %s.', $this->id, $e->getMessage())

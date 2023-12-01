@@ -13,6 +13,6 @@ class TelegramChannel
     {
         $message = $notification->toTelegram($notifiable);
 
-        // Send notification to the $notifiable instance...
+        // here we can handle our custom way of sending telegram notification along with other functionality
     }
 }
