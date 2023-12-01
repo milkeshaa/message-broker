@@ -17,13 +17,13 @@ Clone it and start using it.
     MAIL_USERNAME=***c605c527de1 #here paste your Mailtrap username
     MAIL_PASSWORD=***cd851d79a3f #here paster your Mailtrap password
 ```
++ Install the dependencies:
+```sh
+        $ docker-compose run --rm composer install
+```
 + Run the following command to make services up and running:
 ```sh
         $ docker-compose up -d --build
-```
-+ To install the dependencies:
-```sh
-        $ docker-compose run --rm composer install
 ```
 + To run the migrations (for failed_jobs & messages tables):
 ```sh
