@@ -47,65 +47,65 @@ services:
     networks:
       - laravel
 
-#  sms-queue:
-#    build:
-#      context: ./
-#      dockerfile: .docker/php/Dockerfile
-#    container_name: sms-queue
-#    volumes:
-#      - ./src:/var/www
-#    working_dir: /var/www
-#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=sms' ]
-#    networks:
-#      - laravel
-#
-#  webhook-queue:
-#    build:
-#      context: ./
-#      dockerfile: .docker/php/Dockerfile
-#    container_name: webhook-queue
-#    volumes:
-#      - ./src:/var/www
-#    working_dir: /var/www
-#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=webhook' ]
-#    networks:
-#      - laravel
-#
-#  slack-queue:
-#    build:
-#      context: ./
-#      dockerfile: .docker/php/Dockerfile
-#    container_name: slack-queue
-#    volumes:
-#      - ./src:/var/www
-#    working_dir: /var/www
-#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=slack' ]
-#    networks:
-#      - laravel
-#
-#  email-queue:
-#    build:
-#      context: ./
-#      dockerfile: .docker/php/Dockerfile
-#    container_name: email-queue
-#    volumes:
-#      - ./src:/var/www
-#    working_dir: /var/www
-#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=email' ]
-#    networks:
-#      - laravel
-#
-#  telegram-queue:
-#    build:
-#      context: ./
-#      dockerfile: .docker/php/Dockerfile
-#    container_name: telegram-queue
-#    volumes:
-#      - ./src:/var/www
-#    working_dir: /var/www
-#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=telegram' ]
-#    networks:
-#      - laravel
+  sms-queue:
+    build:
+      context: ./
+      dockerfile: .docker/php/Dockerfile
+    container_name: sms-queue
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=sms' ]
+    networks:
+      - laravel
+
+  webhook-queue:
+    build:
+      context: ./
+      dockerfile: .docker/php/Dockerfile
+    container_name: webhook-queue
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=webhook' ]
+    networks:
+      - laravel
+
+  slack-queue:
+    build:
+      context: ./
+      dockerfile: .docker/php/Dockerfile
+    container_name: slack-queue
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=slack' ]
+    networks:
+      - laravel
+
+  email-queue:
+    build:
+      context: ./
+      dockerfile: .docker/php/Dockerfile
+    container_name: email-queue
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=email' ]
+    networks:
+      - laravel
+
+  telegram-queue:
+    build:
+      context: ./
+      dockerfile: .docker/php/Dockerfile
+    container_name: telegram-queue
+    volumes:
+      - ./src:/var/www
+    working_dir: /var/www
+    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=telegram' ]
+    networks:
+      - laravel
 
 networks:
   laravel:
