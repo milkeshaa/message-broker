@@ -58,7 +58,6 @@ class PushMessage extends Command implements PromptsForMissingInput
      */
     public function handle(): void
     {
-        // TODO: use some libs from available
         try {
             $channel = $this->getChannel();
             $receiver = $this->getReceiver($channel);
@@ -111,6 +110,9 @@ class PushMessage extends Command implements PromptsForMissingInput
     {
         $receiver = '';
         $error = '';
+        if (in_array($channel, [ChannelEnum::SLACK, ChannelEnum::TELEGRAM])) {
+            return $receiver;
+        }
         if (ChannelEnum::EMAIL === $channel) {
             $receiver = $this->ask('Please, provide receivers email');
             if (!$receiver) {
