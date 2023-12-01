@@ -86,6 +86,8 @@ class PushMessage extends Command implements PromptsForMissingInput
         */
         $anonymousNotification = new AnonymousNotifiable();
         $anonymousNotification->notify($notification->onQueue($channel->value));
+        $this->info('Message was queued according to template & channel provided!');
+        $this->info(sprintf('Please check ./src/storage/logs/%s-channel-laravel.log file for logs', $channel->value));
     }
 
     /**

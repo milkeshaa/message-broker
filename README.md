@@ -17,6 +17,7 @@ Clone it and start using it.
     MAIL_USERNAME=***c605c527de1 #here paste your Mailtrap username
     MAIL_PASSWORD=***cd851d79a3f #here paster your Mailtrap password
 ```
++ Please double-check if DB_HOST & REDIS_HOST are as you expect them to be (by default I'm setting containers names, but maybe your system requires ip address instead)
 + Install the dependencies:
 ```sh
         $ docker-compose run --rm composer install
@@ -73,3 +74,4 @@ Clone it and start using it.
     for telegram - /src/storage/logs/telegram-channel-laravel.log
     for slack - /src/storage/logs/slack-channel-laravel.log
 ```
++ To check if message was actually sent out feel free to jump to your Mailtrap inbox (for *email* channel) or to provided URL server logs (for *webhook* channel).
