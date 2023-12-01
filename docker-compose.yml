@@ -2,9 +2,27 @@ version: "3.9"
 
 services:
 
+  db:
+    image: mysql:8.2.0
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: laravel
+      MYSQL_PASS: laravel
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - laravel
+
   composer:
     image: composer:latest
     container_name: composer
+    user: 1000:1000
     volumes:
       - ./src:/var/www
     working_dir: /var/www
@@ -12,7 +30,7 @@ services:
       - laravel
 
   redis:
-    image: 'redis:alpine'
+    image: 'redis:6.0.2'
     container_name: redis
     networks:
       - laravel
@@ -29,66 +47,69 @@ services:
     networks:
       - laravel
 
-  sms-queue:
-    build:
-      context: ./
-      dockerfile: .docker/php/Dockerfile
-    container_name: sms-queue
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
-    entrypoint: [ 'php', 'artisan', 'queue:work', '--queue=sms' ]
-    networks:
-      - laravel
-
-  webhook-queue:
-    build:
-      context: ./
-      dockerfile: .docker/php/Dockerfile
-    container_name: webhook-queue
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
-    entrypoint: [ 'php', 'artisan', 'queue:work', '--queue=webhook' ]
-    networks:
-      - laravel
-
-  slack-queue:
-    build:
-      context: ./
-      dockerfile: .docker/php/Dockerfile
-    container_name: slack-queue
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
-    entrypoint: [ 'php', 'artisan', 'queue:work', '--queue=slack' ]
-    networks:
-      - laravel
-
-  email-queue:
-    build:
-      context: ./
-      dockerfile: .docker/php/Dockerfile
-    container_name: email-queue
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
-    entrypoint: [ 'php', 'artisan', 'queue:work', '--queue=email' ]
-    networks:
-      - laravel
-
-  telegram-queue:
-    build:
-      context: ./
-      dockerfile: .docker/php/Dockerfile
-    container_name: telegram-queue
-    volumes:
-      - ./src:/var/www
-    working_dir: /var/www
-    entrypoint: [ 'php', 'artisan', 'queue:work', '--queue=telegram' ]
-    networks:
-      - laravel
+#  sms-queue:
+#    build:
+#      context: ./
+#      dockerfile: .docker/php/Dockerfile
+#    container_name: sms-queue
+#    volumes:
+#      - ./src:/var/www
+#    working_dir: /var/www
+#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=sms' ]
+#    networks:
+#      - laravel
+#
+#  webhook-queue:
+#    build:
+#      context: ./
+#      dockerfile: .docker/php/Dockerfile
+#    container_name: webhook-queue
+#    volumes:
+#      - ./src:/var/www
+#    working_dir: /var/www
+#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=webhook' ]
+#    networks:
+#      - laravel
+#
+#  slack-queue:
+#    build:
+#      context: ./
+#      dockerfile: .docker/php/Dockerfile
+#    container_name: slack-queue
+#    volumes:
+#      - ./src:/var/www
+#    working_dir: /var/www
+#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=slack' ]
+#    networks:
+#      - laravel
+#
+#  email-queue:
+#    build:
+#      context: ./
+#      dockerfile: .docker/php/Dockerfile
+#    container_name: email-queue
+#    volumes:
+#      - ./src:/var/www
+#    working_dir: /var/www
+#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=email' ]
+#    networks:
+#      - laravel
+#
+#  telegram-queue:
+#    build:
+#      context: ./
+#      dockerfile: .docker/php/Dockerfile
+#    container_name: telegram-queue
+#    volumes:
+#      - ./src:/var/www
+#    working_dir: /var/www
+#    entrypoint: [ 'php', 'artisan', 'queue:listen', '--queue=telegram' ]
+#    networks:
+#      - laravel
 
 networks:
   laravel:
     name: laravel
+
+volumes:
+  mysql:

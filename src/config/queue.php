@@ -117,14 +117,6 @@ return [
         ],
     ],
 
-    'available_channels' => [
-        'sms',
-        'webhook',
-        'slack',
-        'email',
-        'telegram',
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Job Batching
