@@ -21,9 +21,13 @@ Clone it and start using it.
 ```sh
         $ docker-compose up -d --build
 ```
-+ To start using the App run the following command:
++ To install the dependencies:
 ```sh
         $ docker-compose run --rm composer install
+```
++ To run the migrations (for failed_jobs & messages tables):
+```sh
+        $ docker-compose run artisan migrate
 ```
 ## Notes
 + You don't need to start queues for different channels, since it's already handled in the docker-compose file with containers.
